@@ -9,68 +9,73 @@ All colors MUST be HSL.
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 220 15% 20%;
+    --foreground: 220 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 15% 20%;
+    --card-foreground: 220 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 20%;
+    --popover-foreground: 220 15% 15%;
 
-    --primary: 210 100% 45%;
+    --primary: 262 83% 58%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 25% 95%;
-    --secondary-foreground: 220 15% 20%;
+    --secondary: 220 25% 96%;
+    --secondary-foreground: 220 15% 15%;
 
     --muted: 220 20% 96%;
-    --muted-foreground: 220 10% 50%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 180 100% 50%;
-    --accent-foreground: 220 15% 20%;
+    --accent: 178 94% 52%;
+    --accent-foreground: 220 15% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 90%;
-    --input: 220 20% 90%;
-    --ring: 210 100% 45%;
+    --border: 220 20% 92%;
+    --input: 220 20% 92%;
+    --ring: 262 83% 58%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(210, 100%, 45%), hsl(200, 100%, 55%));
-    --gradient-accent: linear-gradient(135deg, hsl(180, 100%, 50%), hsl(170, 100%, 55%));
-    --shadow-glow: 0 10px 40px -10px hsl(210 100% 45% / 0.3);
+    --gradient-primary: linear-gradient(135deg, hsl(262, 83%, 58%), hsl(237, 100%, 70%));
+    --gradient-secondary: linear-gradient(135deg, hsl(178, 94%, 52%), hsl(200, 100%, 60%));
+    --gradient-mesh: radial-gradient(at 0% 0%, hsl(262, 83%, 58%) 0px, transparent 50%), 
+                     radial-gradient(at 100% 0%, hsl(237, 100%, 70%) 0px, transparent 50%),
+                     radial-gradient(at 100% 100%, hsl(178, 94%, 52%) 0px, transparent 50%),
+                     radial-gradient(at 0% 100%, hsl(200, 100%, 60%) 0px, transparent 50%);
+    --shadow-glow: 0 0 60px -15px hsl(262 83% 58% / 0.5);
+    --shadow-glow-accent: 0 0 60px -15px hsl(178 94% 52% / 0.5);
   }
 
   .dark {
-    --background: 220 25% 8%;
+    --background: 224 71% 4%;
     --foreground: 0 0% 95%;
 
-    --card: 220 20% 12%;
+    --card: 224 71% 7%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 220 20% 12%;
+    --popover: 224 71% 7%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 210 100% 55%;
+    --primary: 263 70% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 20% 16%;
+    --secondary: 224 50% 12%;
     --secondary-foreground: 0 0% 95%;
 
-    --muted: 220 20% 16%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 224 50% 12%;
+    --muted-foreground: 220 10% 55%;
 
-    --accent: 180 100% 50%;
+    --accent: 178 94% 52%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 20%;
-    --input: 220 20% 20%;
-    --ring: 210 100% 55%;
+    --border: 224 50% 15%;
+    --input: 224 50% 15%;
+    --ring: 263 70% 60%;
   }
 }
 
@@ -80,6 +85,62 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
+  }
+
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+  }
+
+  .perspective-card {
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+  }
+
+  .perspective-card:hover {
+    transform: rotateY(5deg) rotateX(5deg);
   }
 }
